@@ -1,7 +1,6 @@
 ---
 - name: Patch cleanup
-  hosts: localhost
-  connection: local
+  hosts: all
   become: true
   gather_facts: true
   roles:
