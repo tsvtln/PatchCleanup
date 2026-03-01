@@ -4,7 +4,7 @@ Minimal Ansible role and playbook to update the apt cache and autoremove unused 
 
 ## Output
 
-The role prints a final task named "Job Summary Output" so downstream tooling can parse results. The autoremove task also emits the full Ansible result for visibility.
+The role prints a final task named "Job Summary Output" with a multi-line summary, including host, change status, and a list of removed packages if any. This is designed for both human readability and downstream parsing.
 
 ## Usage
 

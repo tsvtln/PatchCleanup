@@ -9,8 +9,19 @@
 
 - name: Job Summary Output
   ansible.builtin.debug:
-    msg:
-      - "apt cache updated={{ apt_update_result.cache_updated | default(false) }}"
-      - "autoremove changed={{ apt_autoremove_result.changed | default(false) }}"
-      - "autoremove stdout={{ (apt_autoremove_result.stdout_lines | default([])) | join(' | ') }}"
+    msg: |
+      ============================================
+      AUTOREMOVE PACKAGES SUMMARY
+      ============================================
+      Hostname: {{ ansible_hostname }} (IP: {{ inventory_hostname }})
+      Autoremove changed: {{ apt_autoremove_result.changed | default(false) }}
+      {% if apt_autoremove_result is defined and apt_autoremove_result.changed %}
+      Packages were auto-removed.
+      
+      List of removed packages:
+      {{ apt_autoremove_result.stdout | default('No details available') }}
+      {% else %}
+      No packages were auto-removed.
+      {% endif %}
+      ============================================
   tags: [summary]
