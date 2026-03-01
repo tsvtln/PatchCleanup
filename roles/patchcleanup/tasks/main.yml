@@ -1,0 +1,8 @@
+---
+- name: Update apt cache
+  ansible.builtin.import_tasks: apt_update.yml
+  tags: [apt, update]
+
+- name: Autoremove unused packages
+  ansible.builtin.import_tasks: apt_autoremove.yml
+  tags: [apt, autoremove]
