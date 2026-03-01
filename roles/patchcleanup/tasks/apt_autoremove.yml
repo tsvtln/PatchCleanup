@@ -3,3 +3,8 @@
   become: true
   ansible.builtin.apt:
     autoremove: true
+  register: apt_autoremove_result
+
+- name: Autoremove output details
+  ansible.builtin.debug:
+    var: apt_autoremove_result

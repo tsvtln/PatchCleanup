@@ -6,3 +6,11 @@
 - name: Autoremove unused packages
   ansible.builtin.import_tasks: apt_autoremove.yml
   tags: [apt, autoremove]
+
+- name: Job Summary Output
+  ansible.builtin.debug:
+    msg:
+      - "apt cache updated={{ apt_update_result.cache_updated | default(false) }}"
+      - "autoremove changed={{ apt_autoremove_result.changed | default(false) }}"
+      - "autoremove stdout={{ (apt_autoremove_result.stdout_lines | default([])) | join(' | ') }}"
+  tags: [summary]
